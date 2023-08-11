@@ -1,11 +1,8 @@
-from selenium import webdriver
 from selenium.webdriver.common.by import By
-
 from pages.PageObject import PageObject
 
 
 class LoginPage(PageObject):
-
     # Funções do Selenium ficam dentro da Page
     # Locators
 
@@ -16,15 +13,11 @@ class LoginPage(PageObject):
     id_username = 'user-name'
     id_password = 'password'
 
-
-    def __init__(self):
-      super(LoginPage, self).__init__()
-      self.driver.get(self.url)
+    def __init__(self, browser):
+        super(LoginPage, self).__init__(browser=browser)
+        self.driver.get(self.url)
 
     # Services
-    def close_browser(self):
-        self.driver.quit()
-
     def click_login_btn(self):
         self.driver.find_element(By.ID, self.id_login_button).click()
 
@@ -39,4 +32,3 @@ class LoginPage(PageObject):
         self.driver.find_element(By.ID, self.id_username).send_keys(user_name)
         self.driver.find_element(By.ID, self.id_password).send_keys(password)
         self.click_login_btn()
-
